@@ -1,0 +1,60 @@
+
+<style>
+*{
+margin:0px;
+
+padding:0px;	
+}
+#header{
+background-color: grey;
+font-variant: small-caps;
+border-bottom: 1px solid black;
+}
+.prices{
+background-color: lightgray;
+margin-left: 10px;
+width: 50px;
+}
+form{
+	padding-top: 10px;
+    padding-bottom: 15px;
+	padding-left: 30px;
+	background-color: gray;
+	
+}
+
+</style>
+<script>
+ function formSubmit() {
+            google.script.run.createInvoice(document.forms[0]);
+              Logger.log('Got this far');
+            google.script.host.close();
+            
+                 }
+  
+</script>
+
+<form>
+Events:
+ 
+<ol  id="events" name="getPrice">
+
+</ol>
+<div>
+
+Make checks payable to: 
+<input type="text" name="payCheck"/><br>
+Check to send invoices now: 
+<input type="checkbox" name="send" value="false" id="checkBox" onClick="openText()"/> <br>
+
+</div>
+  
+<input type="button" value="Create Invoices"
+    onclick="this.value='Please Wait...';this.disabled=true;formSubmit()" />  
+
+ <input type= "button" value= "Close" onclick="google.script.host.close();"/>
+
+</form>
+
+
+

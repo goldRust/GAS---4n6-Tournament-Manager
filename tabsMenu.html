@@ -1,0 +1,56 @@
+<style>
+*{
+margin:0px;
+
+padding:0px;	
+}
+#header{
+background-color: grey;
+font-variant: small-caps;
+border-bottom: 1px solid black;
+}
+.prices{
+background-color: lightgray;
+margin-left: 10px;
+width: 50px;
+}
+form{
+	padding-top: 10px;
+	padding-left: 30px;
+	background-color: gray;
+
+}
+
+</style><script>
+ function formSubmit() {
+
+            google.script.run.rTabsMenu(document.forms[0]);
+            Logger.log('Got this far');
+            google.script.host.close();
+            Logger.log('Got this far');
+                 }
+</script>
+
+<form>
+Which sort of Tabulation would you prefer?
+<br/><select name="tTab">
+ <option value="makeTabs1">Cut-Throat</option>
+  <option value="makeTabs2">Cumulative</option>
+  <option value="makeTabs3">Reciprocal</option>
+
+
+
+</select>
+
+<br/><br/>
+
+<input type="button" value="Create Tab Sheet"
+    onclick="this.value='Please Wait...';this.disabled=true;formSubmit()"/>  
+ 
+<br/><br/> 
+</form>
+
+
+ 
+
+

@@ -1,0 +1,87 @@
+<style>
+*{
+margin:0px;
+
+padding:0px;	
+}
+#header{
+background-color: grey;
+font-variant: small-caps;
+border-bottom: 1px solid black;
+}
+
+form{
+	padding-top: 10px;
+	padding-left: 10px;
+	background-color: gray;
+	height: 800px;
+}
+#button{
+	background-color: green;
+	
+}
+</style>
+
+
+<script>
+ function formSubmit() {
+            google.script.run.setEvents(document.forms[0]);
+                 }
+function toggle(source) {
+  checkboxes = document.getElementsByName('foo');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+function createForm(){
+google.script.run.makeForm(document.forms[0]);
+}
+function addEvent(){
+          var eventName = document.getElementById('newEvent').value;      
+    
+          var newdiv= document.createElement('div');
+          newdiv.innerHTML =  " <input type='checkbox' name='foo' value="+eventName+">"+eventName+"<br/>";
+          document.getElementById("events").appendChild(newdiv);
+          counter++;
+     
+}
+
+</script>
+<head>
+
+</head>
+<div id="header">
+<h2>Setup</h2>
+</div>
+<form>
+Tournament Name: <input type="text" name="tName" /><br/>
+Tournament Date: <input type="date" name="tDate"><br/>
+Events:
+  <input type="checkbox" onClick="toggle(this)" /> Select All<br/>
+<div id="events">
+<input type="checkbox" name="foo" value="Extemp"> Extemporaneous<br/>
+<input type="checkbox" name="foo" value="Inf"> Informative<br/>
+<input type="checkbox" name="foo" value="OO"> Original Oration <br/>
+<input type="checkbox" name="foo" value="Imp"> Impromptu<br/>
+<input type="checkbox" name="foo" value="Poe"> Poetry<br/>
+<input type="checkbox" name="foo" value="Pro"> Prose<br/>
+<input type="checkbox" name="foo" value="HSA"> Humorous Solo <br/>
+<input type="checkbox" name="foo" value="SSA"> Serious Solo<br/>
+<input type="checkbox" name="foo" value="DA"> Duet <br/>
+<input type="checkbox" name="foo" value="IDA"> Improvised Duet<br/>
+</div>
+<br/>
+<input type="text"name="newEvent" id='newEvent'/><input class="button" type="button" value="Add Event" onclick="addEvent()"/>
+<br/>
+<br/>
+Maximum event entries per team: <input type="number" name="maxE"><br/>
+  
+<input type="button" value="Set Events"
+    onclick="formSubmit()" />  
+ <input class="button" type="button" value ="Create Form" onclick="this.value='Created';this.disabled=true;createForm()"/>
+ <input type= "button" class="button" value= "Close" onclick="google.script.host.close()"/>
+
+</form>
+
+
+

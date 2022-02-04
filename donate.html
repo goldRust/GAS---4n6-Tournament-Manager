@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<style>
+*{
+margin:0px;
+
+padding:0px;	
+}
+#header{
+background-color: grey;
+font-variant: small-caps;
+border-bottom: 1px solid black;
+}
+html{	padding-top: 10px;
+	padding-left: 10px;
+	background-color: gray;
+	height: 800px;}
+form{
+	padding-top: 10px;
+	padding-left: 10px;
+	background-color: gray;
+	height: 800px;
+}
+#button{
+	background-color: green;
+	
+}
+</style>
+<html>
+
+<p>
+Select what you'd like to pay based on how much you like Tournament Manager.<br/>
+<br/> Please pay each time you use Tournament Manager! <br/><br/>
+Alternatively, if I am attending your tournament, you can waive my school's fee.
+</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="4FZVHFL86A4WA">
+<table>
+<tr><td><input type="hidden" name="on0" value="How useful is Tournament Manager?">How useful is Tournament Manager?</td></tr><tr><td><select name="os0">
+	<option value="Ok.">Ok. $10.00 USD</option>
+	<option value="Pretty Good.">Pretty Good. $15.00 USD</option>
+	<option value="Awesome!">Awesome! $20.00 USD</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="USD">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+</html>
+
+

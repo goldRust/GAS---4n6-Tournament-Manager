@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style>
+*{
+margin:0px;
+
+padding:0px;	
+}
+
+
+label{
+font-size: 16px;
+font-family: sans-serif;
+padding: 3px;
+
+
+}
+input{
+margin: 3px;
+background: lightgray;
+
+}
+form{
+	padding-top: 10px;
+    padding-bottom:15px;
+	padding-left: 30px;
+	background-color: gray;
+	
+}
+
+</style>
+<script>
+function formSubmit() {
+            google.script.run.sendInvoice(document.forms[0]);
+              Logger.log('Got this far');
+            google.script.host.close();
+            
+                 }
+</script>
+	<meta charset="UTF-8">
+	<title>Invoice Message</title>
+</head>
+<body>
+	<form action="">
+	<label for="email">Type an email message to send with your invoice.</label>
+	<textarea name="email" id="eMessage" cols="60" rows="15"></textarea><br>
+	<input type="button" value="Send" onclick="formSubmit();"><input type="button" value="Cancel" onclick="google.script.host.close();"></form>
+</body>
+</html>
