@@ -379,6 +379,9 @@ var cSheet=ss.getSheetByName("Contestants");
 var rSheet=ss.getSheetByName("Rooms");
 var dataSheet=ss.getSheetByName("TM Data");
 var testSheet=ss.getSheetByName("Test");
+var lastColumn = rSheet.getLastColumn();
+var lastRow = rSheet.getLastRow();
+var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues();
 
  var folders= DriveApp.getFoldersByName('4n6 Room Schedules');
   var folder = folders[0];
@@ -406,6 +409,7 @@ tabSheet.insertSheet();
     theseEvents[q+1].setName(tEvents[q]);
     theseEvents[q+1].getRange(3,2,allCon,1).setValues(contestants);
     theseEvents[0].hideSheet();
+
   
     
     // This is where I put room numbers on the tab sheet  
@@ -414,19 +418,20 @@ tabSheet.insertSheet();
     var lastDataRow = 1+1*dataSheet.getLastRow();
    var eInd = dataSheet.getRange(2,1,lastDataRow).getValues();   eInd = clearBlanks(eInd);     eInd = twoToOne(eInd);  
    
-    var lastRow = rSheet.getLastRow();
-    var lastColumn = rSheet.getLastColumn();
+    
+    
     var start = eInd[q];
     var end = eInd[q+1] - 1;
     var numRooms = end - start;
-    var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues();  
-      
+    
       for(j=0;j<numRooms;j++){
         var startCol = start*1+j;
       
        var roomSchedule = rSheet.getRange(3,startCol,lastRow,1).getDisplayValues();
        
+       
         var strRounds = roomSchedule.join();
+        
         var rounds = strRounds.split(",,");
         var roundOne= rounds[0].split(",");
         var roundTwo= rounds[1].split(",");
@@ -469,6 +474,7 @@ tabSheet.insertSheet();
         }
       }
     }
+    
    }
 
   var allTeams = tSheet.getLastRow();
@@ -523,7 +529,7 @@ var rSheet=ss.getSheetByName("Rooms");
 var dataSheet=ss.getSheetByName("TM Data");
 var testSheet=ss.getSheetByName("Test");
   
-  Logger.log("I'm running.");
+  
  var folders= DriveApp.getFoldersByName('4n6 Room Schedules');
   var folder = folders[0];
   var template = "1-ie5JElg67mTEbhmrx-0I4OPAqM_sR7tUo5Qv-WM9YQ";
@@ -541,32 +547,37 @@ tabSheet.insertSheet();
     tabSheet.deleteSheet(tabSheet.getSheetByName('SWEEPS'));
   tabSheet.deleteSheet(tabSheet.getSheetByName('Event'));
 
- Logger.log(tEvents);
- Logger.log(tEvents.length);
-;
+//Moved these variables out of the loop to improve efficiency. 
+
+var allCon = cSheet.getLastRow();
+var lastRow = rSheet.getLastRow();
+var lastColumn = rSheet.getLastColumn();
+
+var lastDataRow = dataSheet.getLastRow();
+var eInd = dataSheet.getRange(2,1,lastDataRow).getValues();   eInd = clearBlanks(eInd);     eInd = twoToOne(eInd);  
+var lastRow = rSheet.getLastRow();
+var lastColumn = rSheet.getLastColumn();
+var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues(); 
+
   for(q=0,r=2;q<tEvents.length;q++,r++){
+    Logger.log("Looping...")
    sourceSheet.copyTo(tabSheet);
     var theseEvents = tabSheet.getSheets();
-    var allCon = cSheet.getLastRow();
+Logger.log(theseEvents);    
     var contestants = cSheet.getRange(2,q+1,allCon,1).getValues();
     theseEvents[q+1].setName(tEvents[q]);
     theseEvents[q+1].getRange(3,2,allCon,1).setValues(contestants);
     theseEvents[0].hideSheet();
-    
-    Logger.log(tEvents[q]);
-   
+      
  // This is where I put room numbers on the tab sheet     
     var thisSheet=theseEvents[q+1]; 
     var dataRange = thisSheet.getRange(3,2,allCon,1).getValues();
-     var lastDataRow = dataSheet.getLastRow();
-     var eInd = dataSheet.getRange(2,1,lastDataRow).getValues();   eInd = clearBlanks(eInd);     eInd = twoToOne(eInd);  
    
-    var lastRow = rSheet.getLastRow();
-    var lastColumn = rSheet.getLastColumn();
+    
     var start = eInd[q];
     var end = eInd[q+1] - 1;
     var numRooms = end - start;
-    var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues();  
+     
       
       for(j=0;j<numRooms;j++){
         var startCol = start*1+j;
@@ -692,10 +703,19 @@ tabSheet.insertSheet();
  Logger.log(tEvents);
  Logger.log(tEvents.length);
 ;
+//Variables used in the loop - but moved out because they only need to be figured once.
+var allCon = cSheet.getLastRow();
+var lastDataRow = dataSheet.getLastRow();
+var eInd = dataSheet.getRange(2,1,lastDataRow).getValues();   eInd = clearBlanks(eInd);     eInd = twoToOne(eInd);      
+var lastRow = rSheet.getLastRow();
+var lastColumn = rSheet.getLastColumn();
+var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues(); 
+
+
   for(q=0,r=2;q<tEvents.length;q++,r++){
    sourceSheet.copyTo(tabSheet);
     var theseEvents = tabSheet.getSheets();
-    var allCon = cSheet.getLastRow();
+    
     var contestants = cSheet.getRange(2,q+1,allCon,1).getValues();
     theseEvents[q+1].setName(tEvents[q]);
     theseEvents[q+1].getRange(3,2,allCon,1).setValues(contestants);
@@ -704,16 +724,12 @@ tabSheet.insertSheet();
    
     // This is where I put room numbers on the tab sheet  
   var thisSheet=theseEvents[q+1]; 
-    var dataRange = thisSheet.getRange(3,2,allCon,1).getValues();
-     var lastDataRow = dataSheet.getLastRow();
-     var eInd = dataSheet.getRange(2,1,lastDataRow).getValues();   eInd = clearBlanks(eInd);     eInd = twoToOne(eInd);   
-   
-    var lastRow = rSheet.getLastRow();
-    var lastColumn = rSheet.getLastColumn();
+  var dataRange = thisSheet.getRange(3,2,allCon,1).getValues();
+    
     var start = eInd[q];
     var end = eInd[q+1] - 1;
     var numRooms = end - start;
-    var roomNames=rSheet.getRange(2,2,1,lastColumn).getDisplayValues();  
+     
       
       for(j=0;j<numRooms;j++){
         var startCol = start*1+j;
